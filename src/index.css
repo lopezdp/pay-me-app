@@ -12,3 +12,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+select.formcontrol,
+textarea.form-control,
+input.form-control {
+	font-size: 16px;
+}
+
+input[type=file] {
+	width: 100%;
+}
