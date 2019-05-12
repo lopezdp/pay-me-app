@@ -5,9 +5,12 @@
 
 import React, { Component } from 'react'; // Added Component
 // Use Link (see r-r-d docs here), for ref to home without refresh
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 // Import navbar component given to you by bootstrap 
 import { Navbar } from "react-bootstrap";
+// Import Routes component so that App knows how to 
+// respond with correct view
+import Routes from "./Routes.js";
 import './App.css';
 
 // We need a component to "contain" our App
@@ -30,8 +33,9 @@ class App extends Component {
             </Navbar.Brand>
           </Navbar.Header>
         </Navbar>
+        <Routes />
       </div>
       );
   }
 }
-export default App;
+export default withRouter(App);
