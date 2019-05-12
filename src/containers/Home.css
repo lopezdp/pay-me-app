@@ -1,0 +1,19 @@
+/*
+  Pay Me Now Wallet
+  P2P anonymous payments
+  Home.css
+*/
+
+.Home .landing-page {
+	text-align: center;
+	padding: 65px;
+}
+
+.Home .landing-page h1 {
+	font-weight: 700;
+	font-family: sans-serif, "Roboto";
+}
+
+.Home .landing-page p {
+	color: #999999;
+}
