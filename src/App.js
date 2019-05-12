@@ -20,7 +20,7 @@ class App extends Component {
         { /* Add bootstrap Navbar */ }
         { /* probably best to discuss JSX and JSX comments */ }
         { /* collapseOnSelect - Toggles expanded to false after the onSelect
-                                event of a descendant of a child <Nav> fires. */ }
+                event of a descendant of a child <Nav> fires. */ }
         <Navbar fluid collapseOnSelect>
           <Navbar.Header>
             <Navbar.Brand>
@@ -31,9 +31,7 @@ class App extends Component {
           </Navbar.Header>
         </Navbar>
       </div>
-
       );
   }
 }
-
 export default App;
