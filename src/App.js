@@ -16,13 +16,18 @@ class App extends Component {
   render() {
     return (
       // should probably discuss className syntax in article
-      <div className="App">
+      <div className="App container">
         { /* Add bootstrap Navbar */ }
         { /* probably best to discuss JSX and JSX comments */ }
         { /* collapseOnSelect - Toggles expanded to false after the onSelect
-                                        event of a descendant of a child <Nav> fires. */ }
+                                event of a descendant of a child <Nav> fires. */ }
         <Navbar fluid collapseOnSelect>
           <Navbar.Header>
+            <Navbar.Brand>
+              <Link to="/">
+                Pay My Wallet
+              </Link>
+            </Navbar.Brand>
           </Navbar.Header>
         </Navbar>
       </div>
@@ -30,27 +35,5 @@ class App extends Component {
       );
   }
 }
-
-/*
-
-// create react app default container
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={ logo } className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer">Learn React</a>
-      </header>
-    </div>
-    );
-}
-
-*/
 
 export default App;
