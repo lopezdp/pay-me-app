@@ -13,7 +13,7 @@ code {
     monospace;
 }
 
-select.formcontrol,
+select.form-control,
 textarea.form-control,
 input.form-control {
 	font-size: 16px;
