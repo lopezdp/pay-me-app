@@ -1,0 +1,10 @@
+@media all and (min-width: 480px) {
+	.sign-in {
+		padding: 60px 0;
+	}
+
+	.sign-in form {
+		margin: 0px auto;
+		max-width: 320px;	
+	}
+}
