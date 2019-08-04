@@ -15,8 +15,27 @@ import './App.css';
 
 // We need a component to "contain" our App
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isAuthenticated: false
+    };
+  }
+
+  userHasAuthenticated = authenticated => {
+    this.setState({
+      isAuthenticated: authenticated
+    });
+  }
+
   // Need to render App container
   render() {
+
+    const childProps = {
+      isAuthenticated: this.state.isAuthenticated,
+      userHasAuthenticated: this.userHasAuthenticated
+    };
+
     return (
       // should probably discuss className syntax in article
       <div className="App container">
