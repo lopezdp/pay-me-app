@@ -32,7 +32,7 @@ export default class Signin extends Component {
     try {
       // Make call to Auth API using aws-amplify
       await Auth.signIn(this.state.email, this.state.password);
-      alert("You are now Signed In!");
+      this.props.userHasAuthenticated(true);
     } catch ( err ) {
       alert(err.message);
     }
