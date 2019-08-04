@@ -61,7 +61,7 @@ class App extends Component {
             </Nav>
           </Navbar.Collapse>
         </Navbar>
-        <Routes />
+        <Routes childProps={ childProps } />
       </div>
       );
   }

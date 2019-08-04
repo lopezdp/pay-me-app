@@ -9,12 +9,20 @@ import { Route, Switch } from "react-router-dom";
 import Home from "./containers/Home";
 import Signin from "./containers/Signin";
 import Page404 from "./containers/404Page";
+import AppliedRoute from "./components/AppliedRoute";
 
-export default () => <Switch>
-                       { /* This is our home page route for the main landing page tyo the app */ }
-                       <Route path="/" exact component={ Home } />
-                       { /* This is the Login Route */ }
-                       <Route path="/login" exact component={ Signin } />
-                       { /* This route will catch all unmatched routes && MUST BE LAST!!! */ }
-                       <Route component={ Page404 } />
-                     </Switch>
+export default ({childProps}) => <Switch>
+                                   { /* This is our home page route for the main landing page tyo the app */ }
+                                   <AppliedRoute path="/"
+                                     exact
+                                     component={ Home }
+                                     props={ childProps } />
+                                   { /* This is the Login Route */ }
+                                   <AppliedRoute path="/login"
+                                     exact
+                                     component={ Signin }
+                                     props={ childProps } />
+                                   { /* This route will catch all unmatched routes && MUST BE LAST!!! */ }
+                                   <Route component={ Page404 } />
+                                 </Switch>
+
