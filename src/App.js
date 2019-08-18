@@ -8,6 +8,7 @@ import { Auth } from "aws-amplify";
 // Use Link (see r-r-d docs here), for ref to home without refresh
 // Import navbar component given to you by bootstrap 
 import { NavLink } from "react-router-dom";
+import { withRouter } from "react-router";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
@@ -47,6 +48,7 @@ class App extends Component {
   handleSignOut = async event => {
     await Auth.signOut();
     this.userHasAuthenticated(false);
+    this.props.history.push("/signin");
   }
 
   // Need to render App container
@@ -93,45 +95,7 @@ class App extends Component {
       );
   }
 }
-export default App;
-
-
-
-
-
-
-
-
-/*
-
-
-  // Here are the login dropdown menu choices in the new nav bar 
-  <NavDropdown title="CRM" id="basic-nav-dropdown">
-    { this.state.isAuthenticated
-      ? <NavDropdown.Item onClick={ this.handleLogout } className="navi-link">
-          Logout
-        </NavDropdown.Item>
-      : <Fragment>
-           // Fragment is like placeholder component 
-          <Nav.Link as={ NavLink }
-            to="/register"
-            className="navi-link"
-            exact>
-            Register
-          </Nav.Link>
-          <Nav.Link as={ NavLink }
-            to="/login"
-            className="navi-link"
-            exact>
-            Login
-          </Nav.Link>
-        </Fragment> }
-  </NavDropdown>
-
-
-
-
-*/
+export default withRouter(App);
 
 
 

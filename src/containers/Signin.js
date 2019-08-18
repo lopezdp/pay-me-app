@@ -9,6 +9,7 @@ export default class Signin extends Component {
     super(props);
 
     this.state = {
+      isLoading: false,
       email: "",
       password: ""
     };
@@ -28,6 +29,10 @@ export default class Signin extends Component {
   handleSubmit = async event => {
     event.preventDefault();
 
+    this.setState({
+      isLoading: true
+    });
+
     // Amplify Authentication logic
     try {
       // Make call to Auth API using aws-amplify
@@ -36,6 +41,10 @@ export default class Signin extends Component {
       this.props.history.push("/");
     } catch ( err ) {
       alert(err.message);
+
+      this.setState({
+        isLoading: false
+      });
     }
   }
 
