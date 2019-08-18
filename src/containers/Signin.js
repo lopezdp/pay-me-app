@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Button from 'react-bootstrap/Button';
+import UiLoadBtn from "../components/UiLoadBtn";
 import Form from 'react-bootstrap/Form';
 import { Auth } from "aws-amplify";
 import "./Signin.css";
@@ -83,13 +83,15 @@ export default class Signin extends Component {
           <Form.Group controlId="rememberUser">
             <Form.Check type="checkbox" label="Remember Me" />
           </Form.Group>
-          <Button block
+          { /* Loading Button Component */ }
+          <UiLoadBtn block
             size="lg"
             disabled={ !this.validateForm() }
             variant="primary"
-            type="submit">
-            Login
-          </Button>
+            type="submit"
+            isLoading={ this.state.isLoading }
+            text="Signin"
+            loadingText="Signing In..." />
         </Form>
       </div>
       );
