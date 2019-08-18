@@ -1,6 +1,6 @@
 {
   "name": "pay-me-app",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "dependencies": {
     "aws-amplify": "^1.1.32",
