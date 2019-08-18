@@ -33,6 +33,7 @@ export default class Signin extends Component {
       // Make call to Auth API using aws-amplify
       await Auth.signIn(this.state.email, this.state.password);
       this.props.userHasAuthenticated(true);
+      this.props.history.push("/");
     } catch ( err ) {
       alert(err.message);
     }

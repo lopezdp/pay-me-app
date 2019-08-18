@@ -3,7 +3,8 @@
   P2P anonymous payments
 */
 
-import React, { Component } from 'react'; // Added Component
+import React, { Component, Fragment } from 'react'; // Added Component
+import { Auth } from "aws-amplify";
 // Use Link (see r-r-d docs here), for ref to home without refresh
 // Import navbar component given to you by bootstrap 
 import { NavLink } from "react-router-dom";
@@ -22,10 +23,30 @@ class App extends Component {
     };
   }
 
+  async componentDidMount() {
+    try {
+      await Auth.currentSession();
+      this.userHasAuthenticated(true);
+    }
+    catch(e) {
+      if(e !== 'No current user'){
+        alert(e);
+      }
+    }
+
+    this.setState({ isAuthenticating: false });
+  }
+
   userHasAuthenticated = authenticated => {
     this.setState({
       isAuthenticated: authenticated
     });
+  }
+
+  // Update authentication state on signout event
+  handleSignOut = async event => {
+    await Auth.signOut();
+    this.userHasAuthenticated(false);
   }
 
   // Need to render App container
@@ -37,6 +58,7 @@ class App extends Component {
     };
 
     return (
+      !this.state.isAuthenticating &&
       // should probably discuss className syntax in article
       <div className="App container">
         <Navbar bg="light" expand="lg">
@@ -45,20 +67,25 @@ class App extends Component {
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="navigate">
-              <Nav.Link as={ NavLink }
-                to="/register"
-                className="navi-link"
-                exact>
-                Register
-              </Nav.Link>
-              <Nav.Link as={ NavLink }
-                to="/login"
-                className="navi-link"
-                exact>
-                Login
-              </Nav.Link>
-            </Nav>
+            { this.state.isAuthenticated
+              ? <NavDropdown.Item onClick={ this.handleSignOut } className="navi-link">
+                  Sign Out
+                </NavDropdown.Item>
+              : <Fragment>
+                  { /* Fragment is like placeholder component */ }
+                  <Nav.Link as={ NavLink }
+                    to="/register"
+                    className="navi-link"
+                    exact>
+                    Register
+                  </Nav.Link>
+                  <Nav.Link as={ NavLink }
+                    to="/signin"
+                    className="navi-link"
+                    exact>
+                    Login
+                  </Nav.Link>
+                </Fragment> }
           </Navbar.Collapse>
         </Navbar>
         <Routes childProps={ childProps } />
@@ -68,6 +95,43 @@ class App extends Component {
 }
 export default App;
 
+
+
+
+
+
+
+
+/*
+
+
+  // Here are the login dropdown menu choices in the new nav bar 
+  <NavDropdown title="CRM" id="basic-nav-dropdown">
+    { this.state.isAuthenticated
+      ? <NavDropdown.Item onClick={ this.handleLogout } className="navi-link">
+          Logout
+        </NavDropdown.Item>
+      : <Fragment>
+           // Fragment is like placeholder component 
+          <Nav.Link as={ NavLink }
+            to="/register"
+            className="navi-link"
+            exact>
+            Register
+          </Nav.Link>
+          <Nav.Link as={ NavLink }
+            to="/login"
+            className="navi-link"
+            exact>
+            Login
+          </Nav.Link>
+        </Fragment> }
+  </NavDropdown>
+
+
+
+
+*/
 
 
 
