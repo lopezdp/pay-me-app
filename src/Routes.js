@@ -10,6 +10,7 @@ import Home from "./containers/Home";
 import Signin from "./containers/Signin";
 import Page404 from "./containers/404Page";
 import AppliedRoute from "./components/AppliedRoute";
+import Register from "./components/UserRegistration";
 
 export default ({childProps}) => <Switch>
                                    { /* This is our home page route for the main landing page tyo the app */ }
@@ -23,6 +24,12 @@ export default ({childProps}) => <Switch>
                                      component={ Signin }
                                      props={ childProps } />
                                    { /* This route will catch all unmatched routes && MUST BE LAST!!! */ }
+
+                                   { /* This is the Registration Route */ }
+                                   <AppliedRoute path="/register"
+                                     exact
+                                     component={ Register }
+                                     props={ childProps } />
                                    <Route component={ Page404 } />
                                  </Switch>
 
