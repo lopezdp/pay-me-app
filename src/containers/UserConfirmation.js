@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import Form from "react-bootstrap/Form";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import { Auth } from "aws-amplify";
-import LoaderButton from "../components/LoaderButton";
+import UiLoadBtn from "../components/UiLoadBtn";
 import config from "../config";
-import RegistrationProgressAside from "./RegistrationProgressAside";
+// import RegistrationProgressAside from "./RegistrationProgressAside";
 import "./UserConfirmation.css";
 import { API } from "aws-amplify";
 import { s3Upload } from "../libs/awsLib";
@@ -64,7 +64,7 @@ export default class UserConfirmation extends Component {
       this.props.userHasAuthenticated(true);
 
       // NOTE: this was eliminated to handle it on parent component
-      //this.props.history.push("/");
+      this.props.history.push("/");
 
     } catch ( err ) {
       // eslint-disable-next-line
@@ -80,7 +80,7 @@ export default class UserConfirmation extends Component {
 
     // FIXME: Push All Data to backend here
     // Data needs: UserName...
-    //             different sort key??
+    /*             different sort key??
     try {
 
       const attachment = this.file
@@ -89,25 +89,13 @@ export default class UserConfirmation extends Component {
 
       await this.createNewUser({
         attachment,
-        orgType: this.props.user.orgType,
-        corpName: this.props.user.corpName,
         govNumber: this.props.user.govNumber,
-        qatCrmId: this.props.user.qatCrmId,
         streetAddress: this.props.user.streetAddress,
-        // addressLine2: this.props.user.addressLine2,
-        city: this.props.user.city,
-        state: this.props.user.state,
-        zipCode: this.props.user.zipCode,
-        country: this.props.user.country,
         firstName: this.props.user.firstName,
         lastName: this.props.user.lastName,
-        title: this.props.user.title,
-        officePhone: this.props.user.officePhone,
         mobilePhone: this.props.user.mobilePhone,
-        userName: this.props.user.username,
-        email: this.props.user.email,
-        approvalCode: this.props.user.approvalCode //,
-      //role: this.props.user.role
+        email: this.props.user.email
+        //role: this.props.user.role
       });
 
     } catch ( err ) {
@@ -120,6 +108,8 @@ export default class UserConfirmation extends Component {
       };
     }
 
+    */
+
   }
 
   renderProgressBar = (now) => {
@@ -130,12 +120,12 @@ export default class UserConfirmation extends Component {
     return (progressBar);
   }
 
-  // Function that call backend user endpoint to post new user to db
+  /* Function that call backend user endpoint to post new user to db
   createNewUser(user) {
     return API.post("users", "/users", {
       body: user
     });
-  }
+  }*/
 
 
 
@@ -147,54 +137,23 @@ export default class UserConfirmation extends Component {
   // label for code
   // code input field
   // help block to check email for code
-  // Loader Button with text="Verify" etc on Load
+  // UiLoadBtn with text="Verify" etc on Load
   renderConfirmationForm() {
     // eslint-disable-next-line
     let clsName;
-    let registrationStep;
-    let oType = " " + this.state.orgType;
-    // eslint-disable-next-line
-    let entity = "";
-
-    if (this.state.registrationStep) {
-      registrationStep = this.state.registrationStep.toString();
-    }
-
-    if (this.state.registrationStep.toString() === "4") {
-      clsName = "listStep";
-    } else {
-      clsName = "list";
-    }
-
-    if (oType === "Select From List" || oType === " Select From List") {
-      oType = "";
-    }
-
-    if (oType === " ROV") {
-      entity = " Personal";
-    } else if (oType === " Admin") {
-      entity = " Employee";
-    } else {
-      entity = " Corporate";
-    }
+    //let registrationStep;
 
     return (
       <div>
         <header className="hdr1">
-          <h1 className="title">Confirm your QAT CRM User Account</h1>
-          <h3 className="tagline">Step 4: Confirm your new Login Credentials</h3>
+          <h4 className="title">Confirm your User Account</h4>
+          <h5 className="tagline">Step 4: Protect your Login Credentials</h5>
         </header>
-        <header className="hdr2">
-          <h2 className="title">Confirm your QAT CRM User Account</h2>
-          <h4 className="tagline">Step 4: Confirm your new Login Credentials</h4>
-        </header>
-        <header className="hdr4">
-          <h4 className="title">Confirm your QAT CRM User Account</h4>
-          <h6 className="tagline">Step 4: Confirm your new Login Credentials</h6>
-        </header>
+
         <section id="progressBar">
           { this.renderProgressBar(95) }
         </section>
+
         <div className="signup">
           <Form className="form" onSubmit={ this.handleConfirmationSubmit }>
             <p>
@@ -213,8 +172,8 @@ export default class UserConfirmation extends Component {
                 Please check your email for the code we sent you.
               </Form.Text>
             </Form.Group>
-            { /* LoaderButton Component */ }
-            <LoaderButton block
+            { /* UiLoadBtn Component */ }
+            <UiLoadBtn block
               size="lg"
               disabled={ !this.validateConfirmationForm() }
               variant="primary"
@@ -227,8 +186,8 @@ export default class UserConfirmation extends Component {
           <section id="logo">
             TBD - Section here
           </section>
-          { /* Aside used for credibility seal on mobile devices*/ }
-          <RegistrationProgressAside orgType={ `${oType}` } registrationStep={ `${registrationStep}` } />
+          { /* Aside used for credibility seal on mobile devices
+          <RegistrationProgressAside orgType={ `${oType}` } registrationStep={ `${registrationStep}` } /> */ }
         </div>
       </div>
 

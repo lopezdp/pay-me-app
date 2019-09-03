@@ -19,19 +19,10 @@ import { Auth } from "aws-amplify";
 import UiLoadBtn from "../components/UiLoadBtn";
 import config from "../config";
 // import RegistrationProgressAside from "./RegistrationProgressAside";
-// import UserConfirmation from "../containers/UserConfirmation";
+import UserConfirmation from "../containers/UserConfirmation";
 import "./UserRegistration.css";
 
 export default class UserRegistration extends Component {
-
-
-
-
-
-
-
-
-
 
   constructor(props) {
     super(props);
@@ -413,8 +404,8 @@ export default class UserRegistration extends Component {
         <Media query="(min-width: 568px)">
           <Container>
             <header className="hdr1">
-              <h3 className="title">Register your Account</h3>
-              <h4 className="tagline">Step 1: Basic Information about yourself.</h4>
+              <h4 className="title">Register your Account</h4>
+              <h5 className="tagline">Step 1: Basic Information about yourself.</h5>
             </header>
 
             <section id="progressBar">
@@ -522,8 +513,8 @@ export default class UserRegistration extends Component {
     return (
       <div>
         <header className="hdr1">
-          <h1 className="title">Wallet Registration</h1>
-          <h3 className="tagline">Step 2: Create your User Account</h3>
+          <h4 className="title">Wallet Registration</h4>
+          <h5 className="tagline">Step 2: Create your User Account</h5>
         </header>
         <section id="progressBar">
           { this.renderProgressBar(33) }
@@ -604,8 +595,8 @@ export default class UserRegistration extends Component {
     return (
       <div>
         <header className="hdr1">
-          <h1 className="title">Create a User Account</h1>
-          <h3 className="tagline">Step 3: Create your Login Credentials</h3>
+          <h4 className="title">Create a User Account</h4>
+          <h5 className="tagline">Step 3: Create your Login Credentials</h5>
         </header>
         <section id="progressBar">
           { this.renderProgressBar(66) }
@@ -703,14 +694,14 @@ export default class UserRegistration extends Component {
       "password: " + this.state.approvalCode
     );
 
-    return ( {/*}
-      <UserConfirmation orgType={ this.state.orgType }
+    return (
+      <UserConfirmation
         registrationStep={ this.state.registrationStep }
         email={ this.state.email }
         password={ this.state.password }
         isAuthenticated={ this.props.isAuthenticated }
         userHasAuthenticated={ this.props.userHasAuthenticated }
-        user={ this.state } /> */}
+        user={ this.state } /> 
       );
   }
 
