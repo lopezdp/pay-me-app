@@ -60,7 +60,7 @@ export default class UserRegistration extends Component {
     };
 
     // NOTE: Bind the registration workflow and the suggestion selector
-    // this.registrationWorkFlow = this.registrationWorkFlow.bind(this);
+    this.registrationWorkFlow = this.registrationWorkFlow.bind(this);
     // this.selectSuggestion = this.selectSuggestion.bind(this);
     this.validateForm = this.validateForm.bind(this);
   }
@@ -85,8 +85,8 @@ export default class UserRegistration extends Component {
     // If on step 1 && dealer has name && name is NaN && valid address
     // then bool is true
     if (this.state.registrationStep.toString() === "1") {
-      if (this.state.firstName.length > 0 &&
-        isNaN(this.state.firstName) &&
+      if (this.state.govNumber.length > 0 &&
+        isNaN(this.state.streetAddress) &&
         this.state.streetAddress) {
 
         b = true;
