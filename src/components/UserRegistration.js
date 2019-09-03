@@ -4,7 +4,7 @@
 /* global google */
 
 import React, { Component } from "react";
-// import Container from "react-bootstrap/Container";
+import Container from "react-bootstrap/Container";
 import Media from "react-media";
 import Form from "react-bootstrap/Form";
 import ProgressBar from "react-bootstrap/ProgressBar";
@@ -23,6 +23,16 @@ import config from "../config";
 import "./UserRegistration.css";
 
 export default class UserRegistration extends Component {
+
+
+
+
+
+
+
+
+
+
   constructor(props) {
     super(props);
 
@@ -50,7 +60,7 @@ export default class UserRegistration extends Component {
     };
 
     // NOTE: Bind the registration workflow and the suggestion selector
-    this.registrationWorkFlow = this.registrationWorkFlow.bind(this);
+    // this.registrationWorkFlow = this.registrationWorkFlow.bind(this);
     // this.selectSuggestion = this.selectSuggestion.bind(this);
     this.validateForm = this.validateForm.bind(this);
   }
@@ -291,197 +301,223 @@ export default class UserRegistration extends Component {
   }
 
   renderStep1() {
-    let registrationStep;
+    //let registrationStep;
 
     const { validated } = this.state.validated;
 
-    if (this.state.registrationStep) {
+    /* if (this.state.registrationStep) {
       registrationStep = this.state.registrationStep.toString();
-    }
+    } */
 
     return (
       <div>
         <Media query="(min-width: 319px) and (max-width: 567px)">
-          <header className="hdr1">
-            <h3 className="title">Register your Account</h3>
-            <h4 className="tagline">Step 1: Basic Information about yourself.</h4>
-          </header>
+          <Container>
+            <header className="hdr1">
+              <h4 className="title">Register your Account</h4>
+              <h5 className="tagline">Step 1: Your basic information.</h5>
+            </header>
 
-          <section id="progressBar">
-            { this.renderProgressBar(5) }
-          </section>
-
-          <article className="signup">
-            { /*Start Form for step 1 here!!*/ }
-            <Form className="form"
-              noValidate
-              validated={ validated }
-              onSubmit={ this.handleSubmit }>
-              <p>
-                <strong>Please Register and get access to your Wallet!</strong>
-              </p>
-              
-              { /* This is Dealer Number (DMV Occupational License) that we verify */ }
-              <Form.Group controlId="govNumber" className="gov-num">
-                <Form.Label>
-                  SSN
-                </Form.Label>
-                <Form.Control type="text"
-                  value={ this.state.govNumber }
-                  onChange={ this.handleChange }
-                  placeholder="444-77-3333"
-                  required
-                  minLength="9" />
-                <Form.Text className="help">
-                  Your information is never shared!
-                </Form.Text>
-              </Form.Group>
-
-              { /* NOTE: Implemented Google Geocode API to confirm zipCode & city by location */ }
-              <Form.Group controlId="streetAddress">
-                <Form.Label>
-                  Street Address
-                </Form.Label> {/*
-                <Geosuggest ref={ el => this._geoSuggest = el }
-                  placeholder="Enter you Street Address!"
-                  country="us"
-                  onSuggestSelect={ this.selectSuggestion }
-                  location={ new google.maps.LatLng(33.996575, -117.4068808) }
-                  radius="5000000"
-                  required/> */}
-              </Form.Group>
-
-              { /* This is street Addreess */ }
-              <Form.Group controlId="addressLine2">
-                <Form.Label>
-                  Suite or Unit
-                </Form.Label>
-                <Form.Control type="text"
-                  value={ this.state.addressLine2 }
-                  onChange={ this.handleChange }
-                  placeholder="Ex: Unit #101" />
-                <Form.Text className="help">
-                  Please provide a Suite or Unit number if available.
-                </Form.Text>
-              </Form.Group>
-
-              { /* UiLoadBtn Component */ }
-              <UiLoadBtn block
-                onClick={ this.registrationWorkFlow }
-                size="lg"
-                disabled={ !this.validateForm() }
-                variant="primary"
-                className="nxtBtn"
-                isLoading={ this.state.isLoading }
-                text="Save Changes"
-                loadingText="Saving..." 
-              />
-
-            </Form>
-            { /* Section used for credibility seal on larger screens*/ }
-            <section id="logo">
-              TBD - Section here
+            <section id="progressBar">
+              { this.renderProgressBar(5) }
             </section>
-            { /* Aside used for credibility seal on mobile devices
-            <RegistrationProgressAside orgType="Test" registrationStep={ `${registrationStep}` } />*/ }
-          </article>
+
+            <article className="signup">
+              { /*Start Form for step 1 here!!*/ }
+              <Form className="form"
+                noValidate
+                validated={ validated }
+                onSubmit={ this.handleSubmit }>
+                <p className="signup-tag">
+                  <strong>Register to get access to your Wallet!</strong>
+                </p>
+                
+                { /* This is Dealer Number (DMV Occupational License) that we verify */ }
+                <Form.Group controlId="govNumber" className="gov-num">
+                  <Form.Label>
+                    SSN
+                  </Form.Label>
+                  <Form.Control type="text"
+                    value={ this.state.govNumber }
+                    onChange={ this.handleChange }
+                    placeholder="444-77-3333"
+                    required
+                    minLength="9" />
+                  <Form.Text className="help">
+                    Your information is never shared!
+                  </Form.Text>
+                </Form.Group>
+
+                { /* NOTE: Implemented Google Geocode API to confirm zipCode & city by location */ }
+                <Form.Group controlId="streetAddress">
+                  <Form.Label>
+                    Street Address
+                  </Form.Label>
+
+                  <Form.Control type="text"
+                    value={ this.state.streetAddress }
+                    onChange={ this.handleChange }
+                    placeholder="1234 Main St." />
+                    
+                  <Form.Text className="help">
+                    Please provide your street Address, and include your city, state, and zip code.
+                  </Form.Text>
+
+                   {/*
+                  <Geosuggest ref={ el => this._geoSuggest = el }
+                    placeholder="Enter you Street Address!"
+                    country="us"
+                    onSuggestSelect={ this.selectSuggestion }
+                    location={ new google.maps.LatLng(33.996575, -117.4068808) }
+                    radius="5000000"
+                    required/> */}
+                </Form.Group>
+
+                { /* This is street Address */ }
+                <Form.Group controlId="addressLine2">
+                  <Form.Label>
+                    Suite or Unit
+                  </Form.Label>
+                  <Form.Control type="text"
+                    value={ this.state.addressLine2 }
+                    onChange={ this.handleChange }
+                    placeholder="Ex: Unit #101" />
+                  <Form.Text className="help">
+                    Please provide a Suite or Unit number if available.
+                  </Form.Text>
+                </Form.Group>
+
+                { /* UiLoadBtn Component */ }
+                <UiLoadBtn block
+                  onClick={ this.registrationWorkFlow }
+                  size="lg"
+                  disabled={ !this.validateForm() }
+                  variant="primary"
+                  className="nxtBtn"
+                  isLoading={ this.state.isLoading }
+                  text="Save Changes"
+                  loadingText="Saving..." 
+                />
+
+              </Form>
+              { /* Section used for credibility seal on larger screens*/ }
+              <section id="logo">
+                TBD - Section here
+              </section>
+              { /* Aside used for credibility seal on mobile devices
+              <RegistrationProgressAside orgType="Test" registrationStep={ `${registrationStep}` } />*/ }
+            </article>
+          </Container>
         </Media>
 
         <Media query="(min-width: 568px)">
-          <header className="hdr1">
-            <h3 className="title">Register your Account</h3>
-            <h4 className="tagline">Step 1: Basic Information about yourself.</h4>
-          </header>
+          <Container>
+            <header className="hdr1">
+              <h3 className="title">Register your Account</h3>
+              <h4 className="tagline">Step 1: Basic Information about yourself.</h4>
+            </header>
 
-          <section id="progressBar">
-            { this.renderProgressBar(5) }
-          </section>
-
-          <article className="signup">
-            { /*Start Form for step 1 here!!*/ }
-            <Form className="form"
-              noValidate
-              validated={ validated }
-              onSubmit={ this.handleSubmit }>
-              <p>
-                <strong>Please Register and get access to your Wallet!</strong>
-              </p>
-              
-              { /* This is Dealer Number (DMV Occupational License) that we verify */ }
-              <Form.Group controlId="govNumber" className="gov-num">
-                <Form.Label>
-                  SSN
-                </Form.Label>
-                <Form.Control type="text"
-                  value={ this.state.govNumber }
-                  onChange={ this.handleChange }
-                  placeholder="444-77-3333"
-                  required
-                  minLength="9" />
-                <Form.Text className="help">
-                  Your information is never shared!
-                </Form.Text>
-              </Form.Group>
-
-              { /* NOTE: Implemented Google Geocode API to confirm zipCode & city by location */ }
-              <Form.Group controlId="streetAddress">
-                <Form.Label>
-                  Street Address
-                </Form.Label> {/*
-                <Geosuggest ref={ el => this._geoSuggest = el }
-                  placeholder="Enter you Street Address!"
-                  country="us"
-                  onSuggestSelect={ this.selectSuggestion }
-                  location={ new google.maps.LatLng(33.996575, -117.4068808) }
-                  radius="5000000"
-                  required/> */}
-              </Form.Group>
-
-              { /* This is street Addreess */ }
-              <Form.Group controlId="addressLine2">
-                <Form.Label>
-                  Suite or Unit
-                </Form.Label>
-                <Form.Control type="text"
-                  value={ this.state.addressLine2 }
-                  onChange={ this.handleChange }
-                  placeholder="Ex: Unit #101" />
-                <Form.Text className="help">
-                  Please provide a Suite or Unit number if available.
-                </Form.Text>
-              </Form.Group>
-
-              { /* UiLoadBtn Component */ }
-              <UiLoadBtn block
-                onClick={ this.registrationWorkFlow }
-                size="lg"
-                disabled={ !this.validateForm() }
-                variant="primary"
-                className="nxtBtn"
-                isLoading={ this.state.isLoading }
-                text="Save Changes"
-                loadingText="Saving..." 
-              />
-
-            </Form>
-            { /* Section used for credibility seal on larger screens*/ }
-            <section id="logo">
-              TBD - Section here
+            <section id="progressBar">
+              { this.renderProgressBar(5) }
             </section>
-            { /* Aside used for credibility seal on mobile devices
-            <RegistrationProgressAside orgType="Test" registrationStep={ `${registrationStep}` } />*/ }
-          </article>
+
+            <article className="signup">
+              { /*Start Form for step 1 here!!*/ }
+              <Form className="form"
+                noValidate
+                validated={ validated }
+                onSubmit={ this.handleSubmit }>
+                <p>
+                  <strong>Please Register and get access to your Wallet!</strong>
+                </p>
+                
+                { /* This is Dealer Number (DMV Occupational License) that we verify */ }
+                <Form.Group controlId="govNumber" className="gov-num">
+                  <Form.Label>
+                    SSN
+                  </Form.Label>
+                  <Form.Control type="text"
+                    value={ this.state.govNumber }
+                    onChange={ this.handleChange }
+                    placeholder="444-77-3333"
+                    required
+                    minLength="9" />
+                  <Form.Text className="help">
+                    Your information is never shared!
+                  </Form.Text>
+                </Form.Group>
+
+                { /* NOTE: Implemented Google Geocode API to confirm zipCode & city by location */ }
+                <Form.Group controlId="streetAddress">
+                  <Form.Label>
+                    Street Address
+                  </Form.Label>
+
+                  <Form.Control type="text"
+                    value={ this.state.streetAddress }
+                    onChange={ this.handleChange }
+                    placeholder="1234 Main St." />
+
+                  <Form.Text className="help">
+                    Please provide your street Address.
+                  </Form.Text>
+
+                   {/*
+                  <Geosuggest ref={ el => this._geoSuggest = el }
+                    placeholder="Enter you Street Address!"
+                    country="us"
+                    onSuggestSelect={ this.selectSuggestion }
+                    location={ new google.maps.LatLng(33.996575, -117.4068808) }
+                    radius="5000000"
+                    required/> */}
+                </Form.Group>
+
+                { /* This is street Addreess */ }
+                <Form.Group controlId="addressLine2">
+                  <Form.Label>
+                    Suite or Unit
+                  </Form.Label>
+                  <Form.Control type="text"
+                    value={ this.state.addressLine2 }
+                    onChange={ this.handleChange }
+                    placeholder="Ex: Unit #101" />
+                  <Form.Text className="help">
+                    Please provide a Suite or Unit number if available.
+                  </Form.Text>
+                </Form.Group>
+
+                { /* UiLoadBtn Component */ }
+                <UiLoadBtn block
+                  onClick={ this.registrationWorkFlow }
+                  size="lg"
+                  disabled={ !this.validateForm() }
+                  variant="primary"
+                  className="nxtBtn"
+                  isLoading={ this.state.isLoading }
+                  text="Save Changes"
+                  loadingText="Saving..." 
+                />
+
+              </Form>
+              { /* Section used for credibility seal on larger screens*/ }
+              <section id="logo">
+                TBD - Section here
+              </section>
+              { /* Aside used for credibility seal on mobile devices
+              <RegistrationProgressAside orgType="Test" registrationStep={ `${registrationStep}` } />*/ }
+            </article>
+          </Container>
         </Media>
       </div>
       );
   }
 
   renderStep2(oType) {
-    let registrationStep;
+    //let registrationStep;
 
-    if (this.state.registrationStep) {
+    /* if (this.state.registrationStep) {
       registrationStep = this.state.registrationStep.toString();
-    }
+    } */
 
     return (
       <div>
@@ -563,7 +599,7 @@ export default class UserRegistration extends Component {
   renderStep3() {
     // eslint-disable-next-line
     let clsName;
-    let registrationStep;
+    // let registrationStep;
 
     return (
       <div>
@@ -715,6 +751,8 @@ export default class UserRegistration extends Component {
       );
   }
 }
+
+
 
 
 
